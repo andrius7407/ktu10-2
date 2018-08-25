@@ -79,17 +79,18 @@ namespace ktu10_2
                 file.WriteLine("Visų moliūgų vidutinis svoris: " + String.Format("{0:0.000}", bendrasSvorioVidurkis) + " kg.");
                 if (atrinktuKiekis == 0)
                 {
-                    file.WriteLine("Į supirkimo punktą atrinktų moliūgų nėra");
+                    file.WriteLine("Į supirkimo punktą atrinktų moliūgų nėra.");
                 }
                 else
                 {
-                    file.Write("Į supirkimą atrinkta: " + atrinktuKiekis + " vnt\nVidutinis atrinktų moliūgų svoris: "
-                        + String.Format("{0:0.000}", atrinktuSvorioVidurkis) + " kg.\nAtrinktų moliūgų svorių sąrašas: ");
+                    file.Write("Į supirkimą atrinkta: " + atrinktuKiekis + " vnt.\nVidutinis atrinktų moliūgų svoris: "
+                        + String.Format("{0:0.000}", atrinktuSvorioVidurkis) + " kg.\nAtrinktų moliūgų svorių sąrašas:");
 
                     foreach (var svoris in atrinkti)
                     {
-                        file.Write(String.Format("{0:0.000}", svoris) + " kg ");
+                        file.Write(String.Format("{0: 0.000}", svoris) + " kg");
                     }
+                    file.Write(".");
                 }
             }
         }
