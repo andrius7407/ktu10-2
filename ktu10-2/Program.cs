@@ -12,50 +12,79 @@ namespace ktu10_2
         {
             string[] tekstas =
                  System.IO.File.ReadAllLines(@"C:\Users\Andrius\Documents\Visual Studio 2017\ktu\ktu10-2\ktu10-2\duomenys.txt");
+            //moliugu kiekis
             int kiekis;
-            //svorio intervalo pradzia
+            //superkamu moliugu svorio intervalo pradzia
             double pradzia;
-            //svorio intervalo pabaiga
+            //superkamu moliugu svorio intervalo pabaiga
             double pabaiga;
-            double[] masyvas;
+            //saugome isaugintu moliugu svorius i masyva 
+            double[] svoriai;
+            //skaitome duomenu faila, priskiriame reiksmes
+            SkaitytiDuomenis(tekstas, out kiekis, out pradzia, out pabaiga, out svoriai);
 
-            skaitytiDuomenis(tekstas, out kiekis, out pradzia, out pabaiga, out masyvas);
-            double bendrasSvorioVidurkis = vidurkioSkaiciavimas(masyvas);
+            double bendrasSvorioVidurkis = VidurkioSkaiciavimas(svoriai);
 
             int atrinktuKiekis;
             List<double> atrinkti;
             double atrinktuSvorioVidurkis;
 
-            vidurkioSkaiciavimas(out atrinktuKiekis, out atrinkti, out atrinktuSvorioVidurkis, masyvas, pradzia, pabaiga);
-            spausdinimas(bendrasSvorioVidurkis, atrinktuKiekis, atrinktuSvorioVidurkis, atrinkti);
+            VidurkioSkaiciavimas(out atrinktuKiekis, out atrinkti, out atrinktuSvorioVidurkis, svoriai, pradzia, pabaiga);
+            Spausdinimas(bendrasSvorioVidurkis, atrinktuKiekis, atrinktuSvorioVidurkis, atrinkti);
         }
          
-        private static void skaitytiDuomenis(string[] tekstas, out int kiekis, out double pradzia, out double pabaiga, out double[] masyvas)
+        /// <summary>
+        /// priskiriame kintamiesiems is failo nuskaitytas reiksmes, sukuriame masyva su moliugu svoriais
+        /// </summary>
+        /// <param name="tekstas"></param>
+        /// <param name="kiekis"></param>
+        /// <param name="pradzia"></param>
+        /// <param name="pabaiga"></param>
+        /// <param name="svoriai"></param>
+        private static void SkaitytiDuomenis(string[] tekstas, out int kiekis, out double pradzia, out double pabaiga, out double[] svoriai)
         {
             string[] pirma = tekstas[0].Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
             string[] antra = tekstas[1].Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
             kiekis = Convert.ToInt32(pirma[0]);
             pradzia = Convert.ToDouble(pirma[1]);
             pabaiga = Convert.ToDouble(pirma[2]);
-            masyvas = new double[kiekis];
-            for(int i = 0; i < kiekis; i++)
+            svoriai = new double[kiekis];
+
+            #region 
+
+            for (int i = 0; i < kiekis; i++)
             {
-                masyvas[i] = Convert.ToDouble(antra[i]);
+                svoriai[i] = Convert.ToDouble(antra[i]);
             }
         }
 
-        private static double vidurkioSkaiciavimas(double[] masyvas)
+        /// <summary>
+        /// skaiciuojam visu moliugu svorio vidurki
+        /// </summary>
+        /// <param name="masyvas"></param>
+        /// <returns></returns>
+        private static double VidurkioSkaiciavimas(double[] masyvas)
         {
             double vidurkis = masyvas.Sum() / masyvas.Length;
             return vidurkis;
         }
 
-        private static void vidurkioSkaiciavimas(out int atrinktuKiekis, 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="atrinktuKiekis"></param>
+        /// <param name="atrinkti"></param>
+        /// <param name="atrinktuSvorioVidurkis"></param>
+        /// <param name="masyvas"></param>
+        /// <param name="pradzia"></param>
+        /// <param name="pabaiga"></param>
+        private static void VidurkioSkaiciavimas(out int atrinktuKiekis, 
             out List<double> atrinkti, out double atrinktuSvorioVidurkis, double[] masyvas, double pradzia, double pabaiga)
         {
+            #region AtrinktuSarasas AtrinktuKiekis
+
             atrinkti = new List<double>();
-            atrinktuKiekis = 0;
-            atrinktuSvorioVidurkis = 0;
+            atrinktuKiekis = 0;                      
             for (int i = 0; i < masyvas.Length; i++)
             {
                 if(masyvas[i] > pradzia && masyvas[i] < pabaiga)
@@ -64,14 +93,29 @@ namespace ktu10_2
                     atrinktuKiekis++;
                 }
             }
-            
-            if(atrinktuKiekis > 0)
+
+            #endregion
+
+            #region Vidurkis
+
+            atrinktuSvorioVidurkis = 0;
+            if (atrinktuKiekis > 0)
             {
                 atrinktuSvorioVidurkis = atrinkti.Sum() / atrinktuKiekis;
-            }            
+            }
+
+            #endregion
+
         }
 
-        private static void spausdinimas(double bendrasSvorioVidurkis, int atrinktuKiekis, double atrinktuSvorioVidurkis, List<double> atrinkti)
+        /// <summary>
+        /// spausdiname rezultatus i tekstini faila
+        /// </summary>
+        /// <param name="bendrasSvorioVidurkis"></param>
+        /// <param name="atrinktuKiekis"></param>
+        /// <param name="atrinktuSvorioVidurkis"></param>
+        /// <param name="atrinkti"></param>
+        private static void Spausdinimas(double bendrasSvorioVidurkis, int atrinktuKiekis, double atrinktuSvorioVidurkis, List<double> atrinkti)
         {
             using (System.IO.StreamWriter file =
                 new System.IO.StreamWriter(@"C:\Users\Andrius\Documents\Visual Studio 2017\ktu\ktu10-2\ktu10-2\rezultatai.txt"))
