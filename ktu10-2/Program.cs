@@ -48,14 +48,18 @@ namespace ktu10_2
             kiekis = Convert.ToInt32(pirma[0]);
             pradzia = Convert.ToDouble(pirma[1]);
             pabaiga = Convert.ToDouble(pirma[2]);
+
+
+            #region Uzpildom duomenimis masyva su svoriais
+
             svoriai = new double[kiekis];
-
-            #region 
-
             for (int i = 0; i < kiekis; i++)
             {
                 svoriai[i] = Convert.ToDouble(antra[i]);
             }
+
+            #endregion
+
         }
 
         /// <summary>
@@ -81,6 +85,7 @@ namespace ktu10_2
         private static void VidurkioSkaiciavimas(out int atrinktuKiekis, 
             out List<double> atrinkti, out double atrinktuSvorioVidurkis, double[] masyvas, double pradzia, double pabaiga)
         {
+
             #region AtrinktuSarasas AtrinktuKiekis
 
             atrinkti = new List<double>();
