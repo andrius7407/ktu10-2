@@ -1,6 +1,6 @@
  Moliūgai.
 Ūkininkas  augina  moliūgus  ir pristato  į  supirkimo  punktą.  Supirkimo  punkte priimami  tik
-tiemoliūgai, kurių svoris yra ne mažesnis už p1 kilogramų ir  ne didesnis už p2kilogramų. Parašykite programą, kuri 
+tie moliūgai, kurių svoris yra ne mažesnis už p1 kilogramų ir  ne didesnis už p2 kilogramų. Parašykite programą, kuri 
 apskaičiuotų:
 vidutinį visų moliūgų svorį;
 keli moliūgai bus vežami į supirkimo punktą; 
